@@ -77,13 +77,3 @@ money_earned = float(input())
 
 print('after all you got', money_got - money_spent + money_earned)
 '''
-
-
-
-
-
-
-
-
-
-
