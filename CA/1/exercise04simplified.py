@@ -37,5 +37,5 @@ if 0 <= grade_math <= 100 and 0 <= grade_geography <= 100 and 0 <= grade_history
 # all these else statements are to bypass all the logic when any of the grade values are not met
 # in the range of acceptable
 else:
-    print('the grade you put in is impossible')
+    print('one of the grades you put in is impossible')
 
