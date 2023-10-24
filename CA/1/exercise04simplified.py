@@ -21,26 +21,21 @@ grade_geography = int(input('please enter a grade for geography in the range fro
 grade_history = int(input('please enter a grade for history in the range from 0 to 100'))
 
 # in all these if statements I am checking if all these grades are valid
-if 0 >= grade_math <= 100:
-    if 0 >= grade_geography <= 100:
-        if 0 >= grade_history <= 100:
-            # calculating the average of all these grades
-            average = (grade_history + grade_geography + grade_math) / 3
-            # if the average is higher than 70 it displays the value and says well done
-            if 70 >= average:
-                print('Your GPA was', average, ', well done!')
-            # if the value is in between 40 and 70 it says another expression
-            elif 40 >= average < 70:
-                print('Your GPA was', average, ', good effort, but keep working')
-            # if the value is below 40 it says another expression that the student should study more
-            elif average < 40:
-                print('Your GPA was', average, ', maybe see if you can study with a classmate?')
-        # all these else statements are to bypass all the logic when any of the grade values are not met
-        # in the range of acceptable
-        else:
-            print('the grade you put in is impossible')
-    else:
-        print('the grade you put in is impossible')
+if 0 <= grade_math <= 100 and 0 <= grade_geography <= 100 and 0 <= grade_history <= 100:
+    # calculating the average of all these grades
+    average = (grade_history + grade_geography + grade_math) / 3
+    # if the average is higher than 70 it displays the value and says well done
+    if 70 >= average:
+        print('Your GPA was', average, ', well done!')
+    # if the value is in between 40 and 70 it says another expression
+    elif 40 >= average < 70:
+        print('Your GPA was', average, ', good effort, but keep working')
+    # if the value is below 40 it says another expression that the student should study more
+    elif average < 40:
+        print('Your GPA was', average, ', maybe see if you can study with a classmate?')
+
+# all these else statements are to bypass all the logic when any of the grade values are not met
+# in the range of acceptable
 else:
     print('the grade you put in is impossible')
 
