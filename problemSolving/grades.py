@@ -30,4 +30,5 @@ def sort_grades(grades: list):
     return grades_sorted
 
 
-print(sort_grades(get_grades()))
+if __name__ == "__main__":
+    print(sort_grades(get_grades()))

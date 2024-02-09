@@ -1,0 +1,14 @@
+Users should be able to:
+• Deposit money into their account.
+• Withdraw money from their account.
+• Check the balance on their account.
+You should create a solution to this problem WITHOUT the use of functions (i.e. don’t write any functions of your
+own).
+Part A)
+Write out the sub-problems involved in this overall problem. Identify any assumptions you need to make about the
+program’s logic, including the types of data involved.
+Part B)
+For each sub-problem, write the pseudocode for its solution. This pseudocode can be listed within the code as
+comments if you wish.
+Part C)
+Based on your pseudocode, create the code for the solution.
