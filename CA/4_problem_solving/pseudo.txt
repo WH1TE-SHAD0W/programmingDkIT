@@ -12,3 +12,46 @@ For each sub-problem, write the pseudocode for its solution. This pseudocode can
 comments if you wish.
 Part C)
 Based on your pseudocode, create the code for the solution.
+
+
+The outcome is kinda program with user input to add or subtract money from a user's account.
+Requirements:
+    -   get user log in and sign in
+    -   user input
+    -   data storage and allocation of account to user
+    -   ability to change the data based on the user input
+    -   file to store all the data that is going to act as DB
+
+make a table for users, columns : username, password, account_balance
+open a file with all the  data and load it into list
+
+
+if user is logged in:
+    match statement to get what user want:
+        in case it is withdrawal:
+            ask how much, subtract it from account and get him the money
+        in case it is deposit:
+            ask how much, add it to account and get the money from him
+        in case it is to check balance:
+            tell him how poor he is
+        in case he wants to log out:
+            log out and say bye bye
+        in case it is something else:
+            tell hime wtf he wants, I have no idea...
+
+if user is not logged in:
+    match statement if user wants to sign up or log in:
+        in case he wants to log in:
+            ask what is his username
+            ask what is his password
+            if it is correct:
+                log him in
+            else:
+                say your credentials are wrong
+        in case he wants to sign up:
+            ask for username
+            ask for password
+            make a new row in table of users with username, password and account balance of 0
+        in any other case:
+            ask wtf he wants here
+
