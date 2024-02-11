@@ -1,19 +1,3 @@
-Users should be able to:
-• Deposit money into their account.
-• Withdraw money from their account.
-• Check the balance on their account.
-You should create a solution to this problem WITHOUT the use of functions (i.e. don’t write any functions of your
-own).
-Part A)
-Write out the sub-problems involved in this overall problem. Identify any assumptions you need to make about the
-program’s logic, including the types of data involved.
-Part B)
-For each sub-problem, write the pseudocode for its solution. This pseudocode can be listed within the code as
-comments if you wish.
-Part C)
-Based on your pseudocode, create the code for the solution.
-
-
 The outcome is kinda program with user input to add or subtract money from a user's account.
 Requirements:
     -   get user log in and sign in
@@ -23,35 +7,63 @@ Requirements:
     -   file to store all the data that is going to act as DB
 
 make a table for users, columns : username, password, account_balance
+its empty so to fill it up and continue from using the data from before were gonna load it from our file
 open a file with all the  data and load it into list
 
+make the user not logged in to start from such default state
 
-if user is logged in:
-    match statement to get what user want:
-        in case it is withdrawal:
-            ask how much, subtract it from account and get him the money
-        in case it is deposit:
-            ask how much, add it to account and get the money from him
-        in case it is to check balance:
-            tell him how poor he is
-        in case he wants to log out:
-            log out and say bye bye
-        in case it is something else:
-            tell hime wtf he wants, I have no idea...
+do while we don't quit:
+    if user is logged in:
+        match statement to get what user want:
+            in case it is withdrawal:
+                ask how much, subtract it from account and get him the money
+            in case it is deposit:
+                ask how much, add it to account and get the money from him
+            in case it is to check balance:
+                tell him how poor he is
+            in case he wants to log out:
+                log out and say bye bye
+            in case it is something else:
+                tell hime wtf he wants, I have no idea...
 
-if user is not logged in:
-    match statement if user wants to sign up or log in:
-        in case he wants to log in:
-            ask what is his username
-            ask what is his password
-            if it is correct:
-                log him in
-            else:
-                say your credentials are wrong
-        in case he wants to sign up:
-            ask for username
-            ask for password
-            make a new row in table of users with username, password and account balance of 0
-        in any other case:
-            ask wtf he wants here
+    if user is not logged in:
+        match statement if user wants to sign up or log in:
+            in case he wants to log in:
+                ask what is his username
+                ask what is his password
+                if it is correct:
+                    log him in
+                else:
+                    say your credentials are wrong
+            in case he wants to sign up:
+                ask for username
+                ask for password
+                make a new row in table of users with username, password and account balance of 0
+            in case we want to quit that program its kinda necessary to store our data outside the program as the variables
+                are going to get erased
+            in any other case:
+                ask wtf he wants here
 
+
+
+pseudo code for a code using classes / objects
+
+every person is object with parameters of username, password and account balance
+the program should just adjust those parameters of such objects or create them with default values
+i am going to use the same logic of program but different style and usages of functions
+
+class user
+    definition of object parameters: __init__ (self, username, password, account_balance)
+
+    define certain functions:
+        withdrawal, it's going to check balance and if there is enough put out that amount of money
+        deposit, take in money and increment the account balance
+        balance, print out the account balance
+
+any other functions:
+    sign up, to create another object as user
+        easily just add him to the list
+    log in, check user input username and password if such instance exists otherwise not log in
+    store data
+        to get all parameters of objects stored outside of the program
+    load data

@@ -9,10 +9,10 @@ for entry in data:
     users.append(entry_clear)
 
 logged_in: bool = False
-
+quit_initiated = False
 # program:
 #  do it all the time, (if statements can't be referenced)
-while True:
+while not quit_initiated:
     # if user is logged in:
     if logged_in:
         print('you are now logged in, if you want to withdraw money, write down "withdrawal", otherwise if you want \n'
@@ -53,16 +53,17 @@ while True:
     # if user is not logged in:
     if not logged_in:
         # match statement if user wants to sign up or log in:
-        print('if you want to log in write down "log in" otherwise if you want to sign up write down "sign up"')
+        print('choose one of following options to continue by writing the exact same:\n"log in"\n"sign up"\n"shut '
+              'down" which means also to save')
         user_input = str(input())
         match user_input:
             # in case he wants to log in:
             case "log in":
-                #     ask what is his username
+                # ask what is his username
                 username = input("what is your username?")
-                #     ask what is his password
+                # ask what is his password
                 password = input("what is your password?")
-                #     if it is correct:
+                # if it is correct:
                 for _username in users[0]:
                     if _username == username and users[1][users[0].index(_username)]:
                         # log him in
@@ -74,22 +75,32 @@ while True:
                     print("your credentials are wrong")
             # in case he wants to sign up:
             case "sign up":
-                #     ask for username
+                # ask for username
                 username = input("what is your username?")
-                #     ask for password
+                # ask for password
                 password = input("what is your password?")
-                #     make a new row in table of users with username, password and account balance of 0
-                users[0].append(username)
-                users[1].append(password)
-                users[2].append(float(0))
+                # if a user with such username exist give it a user error of existing username taken
+                user_exist = False
+                for _username in users[0]:
+                    if _username == username and users[1][users[0].index(_username)]:
+                        user_exist = True
+                if not user_exist:
+                    # make a new row in table of users with username, password and account balance of 0
+                    users[0].append(username)
+                    users[1].append(password)
+                    users[2].append(float(0))
+                    print('you got signed up as user with 0 on your bank account')
+                else:
+                    print('username is already taken')
             case "shut down":
-            #     store any changes in that file
+                # store any changes in that file
                 db = open("data.txt", 'w')
                 for _user in users:
                     db.write(f'{_user[0]}%%{_user[1]}%%{_user[2]}\n')
                 db.close()
-                        # in any other case:
+                quit_initiated = True
+                # in any other case:
             case _:
-                #     ask wtf he wants here
+                # ask wtf he wants here
                 print("idk what you want, here...")
 
