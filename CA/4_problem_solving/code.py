@@ -13,6 +13,7 @@ quit_initiated = False
 # program:
 #  do it all the time, (if statements can't be referenced)
 while not quit_initiated:
+    '''as the program starts it runs until its quit'''
     # if user is logged in:
     if logged_in:
         print('you are now logged in, if you want to withdraw money, write down "withdrawal", otherwise if you want \n'
