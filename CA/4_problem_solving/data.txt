@@ -1,2 +1,3 @@
-username%%password%%0
-Adam%%Koutecky%%300.0
+username%%password%%0.0
+Adam%%Koutecky%%800.0
+Jiri%%asdf%%5500.0

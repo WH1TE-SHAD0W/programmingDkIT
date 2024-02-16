@@ -9,11 +9,13 @@ class User:
             print(f"The amount you requested exceeds your current balance, can't withdraw more than you have. Your "
                   f"current balance is:{self.balance}")
         else:
+            auto_save(users)
             self.balance = float(self.balance) - amount
             print(f"Here is your money: {amount} bleh bleh")
 
     def deposit(self, amount):
         self.balance = float(self.balance) + amount
+        auto_save(users)
         print(f'Thanks for your money, it\'s mine now... Your current balance is{self.balance}')
 
     def balance_recall(self):
@@ -32,6 +34,7 @@ def sign_up(users):
         if _user.username == username:
             return 'username already taken'
     users.append(User(username, password, init_balance))
+    auto_save(users)
     return 'you have been successfully signed up'
 
 
@@ -83,10 +86,10 @@ def auto_save(users):
     db.close()
 
 if __name__ == "__main__":
-    users = load_data()
+    users: list = load_data()
     global logged_in
     logged_in: bool = False
-    quit_initiated = False
+    quit_initiated: bool = False
     while not quit_initiated:
         if logged_in:
             print(
