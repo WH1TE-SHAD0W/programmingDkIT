@@ -1,0 +1,39 @@
+Task:
+
+Exercise 1)
+Write a function that validates an email address. Your function should take in a single parameter – the string to be
+validated as an email address – and should return True if the string is a legitimate email address and False
+otherwise. A string is considered an email address if:
+• It contains exactly one @. There must be at least one character before the @.
+• It contains at least one . AFTER the @. There must be text before and after the .
+
+Analysis:
+    The string is indexable, so I can iterate that string. Using this function I will loop throughout to check the
+    correctness. I will
+
+Pseudocode:
+
+Sandbox-mode:
+
+
+Exercise 2)
+Write a program that allows a user to write an email. Your program should prompt the user to enter the following:
+• Subject
+• Recipient (an email address. Your program should validate this using your function from exercise 1 and
+should not proceed until a valid email has been entered)
+• Message body
+Once this information has been read in, your program should append them to the file for the specified recipient
+(i.e. a file with the name matching the recipient’s email address). You should use an appropriate delimiter to
+separate the information making up the email when writing it to the file.
+Exercise 3)
+Write a program that asks the user to enter their email address, then reads in the contents of their email file, i.e.
+the file with a name matching their email address (generated in the previous exercise) into a list of tuples (each
+email should be stored as a tuple). Your program should repeatedly offer the following menu:
+• Sort the emails:
+o By sender (ascending)
+o By date received (descending)
+o By subject (ascending)
+• Display all emails
+• Exit
+Hint: You will need to make sure the structure this program uses to parse the emails out of the file matches the
+structure used in the previous application.
