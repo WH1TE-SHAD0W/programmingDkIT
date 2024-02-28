@@ -26,8 +26,6 @@ Pseudocode:
             \a character in the first part of the mail)
             returns True
             else it returns False
-
-
 Sandbox-mode:
     import regex library
     create function verify_email(mail)
@@ -44,6 +42,33 @@ Once this information has been read in, your program should append them to the f
 (i.e. a file with the name matching the recipient’s email address). You should use an appropriate delimiter to
 separate the information making up the email when writing it to the file.
 
+Analysis:
+    - input: email subject, recipient, text
+    - output: created file with name reciepient email, and inside is subject and email body
+Pseudocode:
+    While loop until sender email is valid from input
+    While loop that ends only if the recipient email address is correct based on the correct_email bool variable
+        check via function from exercise1 is it is correct
+        if it is
+            set correct_email bool variable to true
+        else
+            prompt for another email
+    Ask for a subject and store it into variable
+    Ask for the text and store it into variable
+    if a file with certain email address exists
+        it just runs the function to store all data there (one recipient may have more mail coming) passing parameter
+        of mail, subject and text
+    else
+        it creates the file and runs the function same way
+
+    Function to store data(mail, subject, text, sender)
+        open(mail, 'a')
+        write line 'sender' and delimiter ### sender
+        write line 'datetime' and current timestamp
+        write line 'subject' and delimiter ### subject
+        write line 'text' and delimiter ### text
+
+
 Exercise 3)
 Write a program that asks the user to enter their email address, then reads in the contents of their email file, i.e.
 the file with a name matching their email address (generated in the previous exercise) into a list of tuples (each
@@ -56,3 +81,31 @@ o By subject (ascending)
 • Exit
 Hint: You will need to make sure the structure this program uses to parse the emails out of the file matches the
 structure used in the previous application.
+
+    Analysis:
+        Part one:
+            -   input: correct email
+            -   output: ask for one of the following
+        Part two:
+            -   input: sort by sender / sort by date / sort by subject / display all emails / exit
+            -   output: output is based on the input and reads all the data from file
+        Data storage:
+            data taken loaded from file is about to be stored as a list of tuples, each tuple is a mail
+            [(sender, subject, datetime, text), (sender, subject, datetime, text)...]
+    Pseudocode:
+        While loops until correct email is inserted
+            email stored in a variable
+            opens the file and reads the content
+            for cycle to loop every index of list from readline
+                strips the line
+                splits the line into tuple
+
+        While loops until exit is selected
+            match statement
+                display all
+                    shows all
+                sort by sender
+                sort by date
+                sort by subject
+                exit
+
