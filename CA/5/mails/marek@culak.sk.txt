@@ -1,0 +1,8 @@
+sender_mail###anna@culak.sk
+subject###mailing
+text###ja sa ucim docker
+datetime_created###2024-03-01 02:29:31.262206
+sender_mail###roman@culak.sk
+subject###pytam sa
+text###coze sa to ucis
+datetime_created###2024-03-01 02:30:12.230811
