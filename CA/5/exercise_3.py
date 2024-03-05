@@ -87,6 +87,8 @@ def interact_with_mails(mails):
                         display_all_mails(mails)
                     case 5:
                         quit_not_initiated = True
+                    case _:
+                        print('wrong input')
             else:
                 print('please insert a number from 1 to 5')
         else:
@@ -94,7 +96,7 @@ def interact_with_mails(mails):
 
 
 if __name__ == '__main__':
-    recipient_email = 'marek@culak.sk'  # email_verification(input('What is your email?'))
+    recipient_email = email_verification(input('What is your email?'))
     file_path = get_file_path_to_read(recipient_email)
     if file_path[0]:
         mails = read_emails(file_path[1])

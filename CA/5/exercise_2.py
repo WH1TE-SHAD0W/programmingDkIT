@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from exercise_1 import verify_email
 from os import path
 
@@ -20,8 +19,7 @@ def get_email_to_send(sender_email):
 
     subject = input('What is the mail subject?')
     text = input('What is the email body text?')
-    mail_attributes: tuple = (sender_email, subject, text, recipient_email)
-    return mail_attributes
+    return sender_email, subject, text, recipient_email
 
 
 def send_email(mail_attributes: tuple, file):
@@ -34,6 +32,7 @@ def send_email(mail_attributes: tuple, file):
     storage_mail_content.append(f'{'datetime_created' + '###' + str(time) + '\n'}')
     file.writelines(storage_mail_content)
     file.close()
+
 
 def get_file(recipient_email):
     if path.isfile(f'mails/{recipient_email}.txt'):
