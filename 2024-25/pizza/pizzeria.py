@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from typing import Type
 from orders import Orders
 from pizza import Pizza
@@ -24,9 +25,11 @@ def order_pizza() -> Order:
 
 
 def menu():
-    return ("To place an order type: order"
-            "To edit an order type: edit"
-            "To finish ordering type: finish")
+    return ("To order a pizza type: order\n"
+            "To edit an order type: edit\n"
+            "To finish ordering type: finish\n"
+            "To show today order details: show\n"
+            )
 
 
 def edit_menu():
@@ -34,39 +37,59 @@ def edit_menu():
 
 
 def edit_today_order(order):
-    match input(edit_menu()):
-        case "order":
-            order_pizza()
-        case "edit":
-            edit_menu()
-        case "finish":
-            quit()
-        case _:
-            pass
+    print('editing')
+    # match input(edit_menu()):
+    #     case "order":
+    #         order_pizza()
+    #     case "edit":
+    #         edit_menu()
+    #     case "finish":
+    #         quit()
+    #     case _:
+    #         pass
 
 
-def ordering_program():
+def show_details(today_order):
+    print('order_details')
+
+
+def ordering_program(all_orders: Orders):
     while True:
-        today_orders = Orders()
+        today = date.today()
+        if all_orders.order_at_date(today):
+            today_orders = all_orders.order_at_date(today)
+        else:
+            today_orders = Order()
         match input(menu()):
             case "order":
                 order_pizza()
             case "edit":
-                if today_orders.count_orders() > 0:
-                    edit_today_order()
+                if today_orders:
+                    edit_today_order(all_orders.order_at_date(today))
+                else:
+                    print("No pizzas today yet")
+            case "show":
+                show_details(all_orders.order_at_date(today))
 
             case "finish":
-                quit()
+                all_orders.add_orders(today_orders)
+                break
             case _:
                 pass
 
 
 if __name__ == '__main__':
-    # ordering_program()
-    margerita = Pizza('margerita', 's')
-    order1 = Order()
-    order1.add_pizza(margerita)
-    print(order1.show_date())
+    # margarita = Pizza('margarita', 's')
+    # order1 = Order()
+    # order1.add_pizza(margarita)
+    all_orders = Orders()
+    # all_orders.add_orders(order1)
+    ordering_program(all_orders)
+    # print(order1.show_date())
+    # print(all_orders.order_at_date('2024-09-16').show_pizzas())
+
+
+
 """
 Imports your Pizza class.
 2. Repeatedly asks the user if they want to order a pizza. If they say yes, your program should:

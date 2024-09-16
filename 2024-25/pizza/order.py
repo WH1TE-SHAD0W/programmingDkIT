@@ -1,12 +1,13 @@
-from datetime import datetime
+from datetime import date
 
 from pizza import Pizza
+
 from typing import List
 
 
 class Order:
     def __init__(self):
-        self.date_created = datetime.date(datetime.now())
+        self.date_created = date.today()
         self.pizzas = []
 
     def show_date(self):
@@ -27,3 +28,5 @@ class Order:
     def most_expensive_pizza(self):
         return max(self.pizzas, key=lambda pizza: pizza.calc_price())
 
+    def count_pizzas(self):
+        return len(self.pizzas)
