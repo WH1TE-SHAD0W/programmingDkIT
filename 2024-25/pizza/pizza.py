@@ -12,7 +12,7 @@ class Pizza:
 
     @staticmethod
     def validate_size(size):
-        sizes = ['s', 'm', 'l', 'x']
+        sizes = ['s', 'm', 'l', 'xl']
         if size in sizes:
             return True
         else:
@@ -59,7 +59,5 @@ class Pizza:
         return (f'Pizza named: {self.name} has toppings: {self.toppings} with a price-tag: {self.calc_price()} based '
                 f'on a size: {self.size}')
 
-
-pizza_top = Pizza('top')
-print(pizza_top.get_size())
-
+    def __repr__(self):
+        return f'{self.name, self.size, self.toppings}'
