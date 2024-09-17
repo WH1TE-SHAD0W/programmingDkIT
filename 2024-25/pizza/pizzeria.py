@@ -1,11 +1,10 @@
-from datetime import datetime, date
-from typing import Type
+from datetime import date
 from orders import Orders
 from pizza import Pizza
 from order import Order
 
 
-def order_pizza() -> Order:
+def order_pizza(the_order):
     name = input('What name of a pizza you want?')
     size = input('What size of a pizza you want?')
     while not Pizza.validate_size(size):
@@ -14,14 +13,10 @@ def order_pizza() -> Order:
     if input('Do you want any toppings?').lower() == 'yes':
         toppings = input('Write down which toppings you want').lower().split()
         pizza_to_order = Pizza(name, size, toppings)
-        the_order = Order()
         the_order.add_pizza(pizza_to_order)
-        return the_order
     else:
         pizza_to_order = Pizza(name, size)
-        the_order = Order()
         the_order.add_pizza(pizza_to_order)
-        return the_order
 
 
 def menu():
@@ -33,73 +28,102 @@ def menu():
 
 
 def edit_menu():
-    return "To edit a pizza type the name of the pizza you want"
+    return ("To add a pizza topping type: add\n"
+            "To edit a pizza size: size\n"
+            "To change a pizza name: name\n"
+            "To remove a pizza from the order type: remove\n"
+            "To finish a pizza order: order\n")
 
 
-def edit_today_order(order):
+def edit_pizza_from_order(order: Order):
     print('editing')
-    # match input(edit_menu()):
-    #     case "order":
-    #         order_pizza()
-    #     case "edit":
-    #         edit_menu()
-    #     case "finish":
-    #         quit()
-    #     case _:
-    #         pass
+    show_details(order)
+    pizza = order.get_pizza_by_name(input('What pizza you want to edit?'))
+    user_input = input(edit_menu())
+    while user_input != 'finish':
+        match user_input:
+            case "add":
+                pizza.add_topping(input('What topping you want?'))
+                match input('Do you want to add more toppings? if so type "y"'):
+                    case 'y':
+                        pizza.add_topping(input('What topping you want?'))
+                    case _:
+                        pass
+            case "name":
+                pizza.name = input('What name do you want?')
+            case "size":
+                size = input('What size do you want?')
+                while not Pizza.validate_size(size):
+                    size = input('Please provide a correct size of the pizza you want, choose from (s, m, l, xl)')
+                pizza.size = size
+            case "remove":
+                order.remove_pizza(pizza)
+            case "finish":
+                pass
+            case _:
+                pass
+        user_input = input(edit_menu())
 
 
 def show_details(today_order):
-    print('order_details')
+    for pizza in today_order.show_pizzas():
+        if len(pizza.toppings) > 1:
+            print(f'You just ordered: {pizza.name} of a size '
+                  f'{pizza.size.upper()} with toppings: {pizza.toppings}')
+        else:
+            print(f'You just ordered: {pizza.name} of a size '
+                  f'{pizza.size.upper()} without toppings')
+
+
+def show_price(today_order):
+    for pizza in today_order.show_pizzas():
+        print(f'Price of {pizza.name}, is {pizza.calc_price()}')
+    print(f'The most expensive pizza name is: {today_order.most_expensive_pizza().name} '
+          f'and costs {today_order.most_expensive_pizza().calc_price()}'
+          )
 
 
 def ordering_program(all_orders: Orders):
     while True:
         today = date.today()
         if all_orders.order_at_date(today):
-            today_orders = all_orders.order_at_date(today)
+            today_order = all_orders.order_at_date(today)
         else:
-            today_orders = Order()
+            today_order = Order()
         match input(menu()):
             case "order":
-                order_pizza()
+                order_pizza(today_order)
             case "edit":
-                if today_orders:
-                    edit_today_order(all_orders.order_at_date(today))
+                if today_order:
+                    edit_pizza_from_order(all_orders.order_at_date(today))
                 else:
-                    print("No pizzas today yet")
+                    print("No pizzas ordered today yet")
             case "show":
-                show_details(all_orders.order_at_date(today))
+                if today_order:
+                    show_details(today_order)
+                else:
+                    print("No pizzas ordered today yet")
+            case "price":
+                if today_order:
+                    show_price(today_order)
+                else:
+                    print("No pizzas ordered today yet")
 
             case "finish":
-                all_orders.add_orders(today_orders)
+                all_orders.add_orders(today_order)
                 break
             case _:
                 pass
 
 
 if __name__ == '__main__':
-    # margarita = Pizza('margarita', 's')
-    # order1 = Order()
-    # order1.add_pizza(margarita)
+    margarita = Pizza('margarita', 's')
+    pizza1 = Pizza('quatro', 's')
+    pizza2 = Pizza('fungi', 's')
+    order1 = Order()
+    order1.add_pizza(margarita)
+    order1.add_pizza(pizza2)
+    order1.add_pizza(pizza1)
     all_orders = Orders()
-    # all_orders.add_orders(order1)
+    all_orders.add_orders(order1)
     ordering_program(all_orders)
-    # print(order1.show_date())
-    # print(all_orders.order_at_date('2024-09-16').show_pizzas())
-
-
-
-"""
-Imports your Pizza class.
-2. Repeatedly asks the user if they want to order a pizza. If they say yes, your program should:
-a. Prompt for the size of the pizza to be made
-b. Takes in a list of toppings from the user (they do not have to supply any. If they do not, you
-should create a pizza with default toppings)
-c. Creates a pizza from the user-supplied data
-d. Adds the pizza to the user’s order (a list)
-3. When the user is finished adding pizzas to their order, your program should:
-a. Calculate the cost of each pizza in the user’s order list
-# b. Displays the most expensive pizza and its details
-# c. Adds up the total bill for the pizzas and informs the user.
-"""

@@ -25,8 +25,16 @@ class Order:
             total_bill += pizza.calc_price()
         return total_bill
 
-    def most_expensive_pizza(self):
+    def most_expensive_pizza(self) -> Pizza:
         return max(self.pizzas, key=lambda pizza: pizza.calc_price())
 
     def count_pizzas(self):
         return len(self.pizzas)
+
+    def remove_pizza(self, pizza: Pizza) -> None:
+        self.pizzas.remove(pizza)
+
+    def get_pizza_by_name(self, pizza_name: str) -> Pizza:
+        for pizza in self.pizzas:
+            if pizza_name.lower() == pizza.name.lower():
+                return pizza

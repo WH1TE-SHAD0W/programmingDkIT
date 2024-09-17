@@ -4,11 +4,11 @@ from typing import List
 class Pizza:
     def __init__(self, name: str, size: str = 'm', toppings: List[str] = ['no toppings']):
         if self.validate_size(size):
-            self.size = size
+            self.size: str = size
         else:
             print('This is an inappropriate size')
-        self.toppings = toppings
-        self.name = name
+        self.toppings: List = toppings
+        self.name: str = name
 
     @staticmethod
     def validate_size(size):
