@@ -2,11 +2,12 @@ from typing import List
 
 
 class Pizza:
-    def __init__(self, name: str, size: str = 'm', toppings: List[str] = ['no toppings']):
-        if self.validate_size(size):
-            self.size: str = size
-        else:
-            print('This is an inappropriate size')
+    def __init__(self, name: str, size: str = 'm', toppings=None):
+        if toppings is None:
+            toppings = ['no toppings']
+        if not self.set_size(size):
+            self.size = 'm'
+            self.print_wrong_size()
         self.toppings: List = toppings
         self.name: str = name
 
@@ -21,8 +22,9 @@ class Pizza:
     def set_size(self, size: str):
         if self.validate_size(size):
             self.size = size
+            return True
         else:
-            print('This is an inappropriate size')
+            return False
 
     def get_size(self):
         return self.size
@@ -31,7 +33,7 @@ class Pizza:
         return len(self.toppings)
 
     def add_topping(self, topping: str):
-        if len(self.toppings) < 11:
+        if len(self.toppings) < 11 and topping not in self.toppings:
             self.toppings.append(topping)
             return True
         else:
@@ -56,8 +58,12 @@ class Pizza:
         return price
 
     def details(self):
-        return (f'Pizza named: {self.name} has toppings: {self.toppings} with a price-tag: {self.calc_price()} based '
+        return (f'Pizza named: {self.name} has toppings: {", ".join(self.toppings)} with a price-tag: {self.calc_price()} based '
                 f'on a size: {self.size}')
+
+    @staticmethod
+    def print_wrong_size():
+        print('This is an inappropriate size')
 
     def __repr__(self):
         return f'{self.name, self.size, self.toppings}'
