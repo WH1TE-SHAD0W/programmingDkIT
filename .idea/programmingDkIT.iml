@@ -8,4 +8,11 @@
     <orderEntry type="jdk" jdkName="Python 3.12 (programmingDkIT)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/2024-25" />
+      </list>
+    </option>
+  </component>
 </module>

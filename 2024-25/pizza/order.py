@@ -1,17 +1,15 @@
-from datetime import date
+from datetime import date, datetime
 
 from pizza import Pizza
-
-from typing import List
 
 
 class Order:
     def __init__(self):
-        self.date_created = date.today()
+        self.date_created = datetime.now()
         self.pizzas = []
 
     def show_date(self):
-        return self.date_created
+        return self.date_created.date()
 
     def show_pizzas(self):
         return self.pizzas
@@ -38,3 +36,4 @@ class Order:
         for pizza in self.pizzas:
             if pizza_name.lower() == pizza.name.lower():
                 return pizza
+
