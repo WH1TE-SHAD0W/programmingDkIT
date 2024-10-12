@@ -86,8 +86,8 @@ def show_price(today_order):
 def ordering_program(all_orders: Orders):
     while True:
         today = date.today()
-        if all_orders.order_at_date(today):
-            today_order = all_orders.order_at_date(today)
+        if all_orders.order_at_time(today):
+            today_order = all_orders.order_at_time(today)
         else:
             today_order = Order()
         match input(menu()):
@@ -95,10 +95,10 @@ def ordering_program(all_orders: Orders):
                 order_pizza(today_order)
             case "edit":
                 if today_order:
-                    edit_pizza_from_order(all_orders.order_at_date(today))
+                    edit_pizza_from_order(all_orders.order_at_time(today))
                 else:
                     print("No pizzas ordered today yet")
-            case "show":
+            case "show":    
                 if today_order:
                     show_details(today_order)
                 else:
@@ -110,7 +110,7 @@ def ordering_program(all_orders: Orders):
                     print("No pizzas ordered today yet")
 
             case "finish":
-                all_orders.add_orders(today_order)
+                all_orders.add_order(today_order)
                 break
             case _:
                 pass
@@ -125,5 +125,5 @@ if __name__ == '__main__':
     order1.add_pizza(pizza2)
     order1.add_pizza(pizza1)
     all_orders = Orders()
-    all_orders.add_orders(order1)
+    all_orders.add_order(order1)
     ordering_program(all_orders)
