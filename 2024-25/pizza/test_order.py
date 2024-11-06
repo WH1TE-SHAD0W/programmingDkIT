@@ -30,4 +30,4 @@ class TestOrder:
     def test_get_pizza_by_name(self):
         order = self.create_order()
         expected_string = "('margherita', 'm', ['cheese', 'garlic', 'ham', 'corn'])"
-        assert order.get_pizza_by_name('margherita') == expected_string
+        assert str(order.get_pizza_by_name('margherita')) == expected_string
